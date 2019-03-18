@@ -1,4 +1,4 @@
-FROM node:10.13
+FROM node:latest
 
 RUN mkdir -p /home/Service
 WORKDIR /home/Service
