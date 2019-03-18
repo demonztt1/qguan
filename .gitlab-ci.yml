@@ -2,6 +2,9 @@
 image: node:latest
   # 镜像启动后的容器名
   CONTAINER_NAME: gitlab-ci-cd
+ REGISTRY_IMAGE_TAG: gitlab-ci-cd:master
+ # 镜像启动后的容器名
+  CONTAINER_NAME: gitlab-ci-cd
 
 stages:
    - build
@@ -21,16 +24,19 @@ b1:
 
        # 构建新的镜像
            - docker build -t $REGISTRY_IMAGE_TAG .
-           # 上传镜像
-           - docker push $REGISTRY_IMAGE_TAG
+
    only:
       - master
     tags:
       - ci-cd
 
-t1:
-   stage: test
-   script:
-      - ./a.out
-   tags:
-      - shell
+test:
+  stage: test
+  script:
+    # 本地启动容器进行测试
+    - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
+  when: on_success
+  only:
+    - master
+  tags:
+    - ci-cd
