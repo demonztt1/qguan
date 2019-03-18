@@ -23,7 +23,7 @@ b1:
        - fi
 
        # 构建新的镜像
-           - docker build -t $REGISTRY_IMAGE_TAG .
+        - docker build -t $REGISTRY_IMAGE_TAG .
 
    only:
       - master
