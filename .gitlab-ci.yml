@@ -1,3 +1,8 @@
+# 使用docker镜像
+image: node:latest
+  # 镜像启动后的容器名
+  CONTAINER_NAME: gitlab-ci-cd
+
 stages:
    - build
    - test
@@ -5,11 +10,24 @@ stages:
 b1:
   stage: build
   script:
-    - uname -a
-    - g++ hello.cpp
-    - bash scripts
-  tags:
-    - shell
+   # 停止并删除正在使用当前镜像的容器
+       - if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
+       -  docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME
+       - fi
+       # 删除当前已存在的镜像
+       - if [ "$(docker images | grep $REGISTRY_IMAGE_TAG)" ]; then
+       -  docker rmi $REGISTRY_IMAGE_TAG
+       - fi
+
+       # 构建新的镜像
+           - docker build -t $REGISTRY_IMAGE_TAG .
+           # 上传镜像
+           - docker push $REGISTRY_IMAGE_TAG
+   only:
+      - master
+    tags:
+      - ci-cd
+
 t1:
    stage: test
    script:
