@@ -1,0 +1,18 @@
+stages:
+   - build
+   - test
+   - deploy
+b1:
+  stage: build
+  script:
+    - uname -a
+    - g++ hello.cpp
+    - bash scripts
+  tags:
+    - shell
+t1:
+   stage: test
+   script:
+      - ./a.out
+   tags:
+      - shell
