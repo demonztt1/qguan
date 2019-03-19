@@ -1,32 +1,33 @@
-# 使用docker镜像
+# docker镜像
 image: node:latest
-  # 镜像启动后的容器名
-  CONTAINER_NAME: gitlab-ci-cd
- REGISTRY_IMAGE_TAG: gitlab-ci-cd:master
- # 镜像启动后的容器名
-  CONTAINER_NAME: gitlab-ci-cd
-
-
+# 设置变量
+variables:
+    # 镜像启动后的容器名
+    CONTAINER_NAME: gitlab-ci-cd
+    REGISTRY_IMAGE_TAG: gitlab-ci-cd:master
+    # 镜像启动后的容器名
+    CONTAINER_NAME: gitlab-ci-cd
 stages:
    - build
    - test
    - deploy
-b1:
-  stage: build
-  script:
-   # 停止并删除正在使用当前镜像的容器
-       - if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-       -  docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME
-       - fi
-       # 删除当前已存在的镜像
-       - if [ "$(docker images | grep $REGISTRY_IMAGE_TAG)" ]; then
-       -  docker rmi $REGISTRY_IMAGE_TAG
-       - fi
 
-       # 构建新的镜像
+build:
+    stage: build
+    script:
+        # 停止并删除正在使用当前镜像的容器
+        - if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
+        -  docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME
+        - fi
+        # 删除当前已存在的镜像
+        - if [ "$(docker images | grep $REGISTRY_IMAGE_TAG)" ]; then
+        -  docker rmi $REGISTRY_IMAGE_TAG
+        - fi
+
+        # 构建新的镜像
         - docker build -t $REGISTRY_IMAGE_TAG .
 
-   only:
+    only:
       - master
     tags:
       - ci-cd
@@ -41,3 +42,8 @@ test:
     - master
   tags:
     - ci-cd
+
+deploy:
+  stage: deploy
+  script:
+    - ping 127.0.0.1
