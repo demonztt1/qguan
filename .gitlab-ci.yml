@@ -16,16 +16,7 @@ test:
     stage: test
     script:
         # 停止并删除正在使用当前镜像的容器
-        - if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-        -  docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME
-        - fi
-        # 删除当前已存在的镜像
-        - if [ "$(docker images | grep $REGISTRY_IMAGE_TAG)" ]; then
-        -  docker rmi $REGISTRY_IMAGE_TAG
-        - fi
-
-        # 构建新的镜像
-        - docker build -t $REGISTRY_IMAGE_TAG .
+        - ping 127.0.0.1
 
     only:
       - master
@@ -36,7 +27,7 @@ test:
   stage: test
   script:
     # 本地启动容器进行测试
-    - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
+    - ping 127.0.0.1
   when: on_success
   only:
     - master
