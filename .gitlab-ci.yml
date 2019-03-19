@@ -12,8 +12,8 @@ stages:
    - test
    - deploy
 
-build:
-    stage: build
+test:
+    stage: test
     script:
         # 停止并删除正在使用当前镜像的容器
         - if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
