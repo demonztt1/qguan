@@ -6,6 +6,7 @@ image: node:latest
  # 镜像启动后的容器名
   CONTAINER_NAME: gitlab-ci-cd
 
+
 stages:
    - build
    - test
