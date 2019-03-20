@@ -3,10 +3,10 @@ image: node:latest
 # 设置变量
 variables:
     # 镜像启动后的容器名
-    CONTAINER_NAME: gitlab-ci-cd
-    REGISTRY_IMAGE_TAG: gitlab-ci-cd:master
+    CONTAINER_NAME: node-ci-cd
+    REGISTRY_IMAGE_TAG: node-ci-cd:master
     # 镜像启动后的容器名
-    CONTAINER_NAME: gitlab-ci-cd
+    CONTAINER_NAME: node-ci-cd
 stages:
    - build
    - test
@@ -23,9 +23,8 @@ build:
         - if [ "$(docker images | grep $REGISTRY_IMAGE_TAG)" ]; then
         -  docker rmi $REGISTRY_IMAGE_TAG
         - fi
-
         # 构建新的镜像
-       # - docker build -t $REGISTRY_IMAGE_TAG .
+        - docker build -t $REGISTRY_IMAGE_TAG .
 
     only:
       - master
@@ -37,7 +36,7 @@ test:
   script:
     # 本地启动容器进行测试
     #- docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
-     - ping 127.0.0.1
+      - ping 127.0.0.1 -w 10
   when: on_success
   only:
     - master
@@ -47,4 +46,4 @@ test:
 deploy:
   stage: deploy
   script:
-    - ping 127.0.0.1
+     - ping 127.0.0.1 -w 10
