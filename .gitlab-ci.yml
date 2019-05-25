@@ -34,8 +34,14 @@ test:
     # 本地启动容器进行测试
      - ping 127.0.0.1 -w 10
     # - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
-
+  tags:
+      - test #执行机器
 deploy:
   stage: deploy
   script:
-     - ping 127.0.0.1 -w 10
+  - docker run -d --name $CONTAINER_NAME -p 8080:8080 $REGISTRY_IMAGE_TAG
+  when: manual #手动执行
+  only:
+      - master #git分支
+  tags:
+      - ci-cd #执行机器
