@@ -29,8 +29,6 @@ build:
        # - docker build -t $REGISTRY_IMAGE_TAG .
     only:
       - master
-    tags:
-      - build
 
 test:
   stage: test
@@ -40,8 +38,6 @@ test:
     # - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
   only:
     - master
-  tags:
-    - test
 
 deploy:
   stage: deploy
