@@ -26,23 +26,22 @@ build:
         # 构建新的镜像
         - npm install --production
         - docker build -t $REGISTRY_IMAGE_TAG .
-
     only:
       - master
     tags:
-      - ci-cd
+      - build
 
 test:
   stage: test
   script:
     # 本地启动容器进行测试
-    #- docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
-      - ping 127.0.0.1 -w 10
+     - ping 127.0.0.1 -w 10
+    - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
   when: on_success
   only:
     - master
   tags:
-    - ci-cd
+    - test
 
 deploy:
   stage: deploy
