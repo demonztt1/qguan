@@ -38,7 +38,6 @@ test:
     # 本地启动容器进行测试
      - ping 127.0.0.1 -w 10
     # - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
-  when: on_success
   only:
     - master
   tags:
@@ -48,4 +47,3 @@ deploy:
   stage: deploy
   script:
      - ping 127.0.0.1 -w 10
-  when: manual
