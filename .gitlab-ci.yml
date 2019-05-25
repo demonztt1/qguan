@@ -1,5 +1,5 @@
 # docker镜像
-image: node:latest
+image: docker:latest
 # 设置变量
 variables:
     # 镜像启动后的容器名
@@ -24,8 +24,8 @@ build:
         -  docker rmi $REGISTRY_IMAGE_TAG
         - fi
         # 构建新的镜像
-        - ping 127.0.0.1 -w 10
-        - npm install --production
+       # - ping 127.0.0.1 -w 10
+        #- npm install --production
         - docker build -t $REGISTRY_IMAGE_TAG .
 
 test:
