@@ -25,10 +25,8 @@ build:
         - fi
         # 构建新的镜像
         - ping 127.0.0.1 -w 10
-       # - npm install --production
-       # - docker build -t $REGISTRY_IMAGE_TAG .
-    only:
-      - master
+        - npm install --production
+        - docker build -t $REGISTRY_IMAGE_TAG .
 
 test:
   stage: test
@@ -36,8 +34,6 @@ test:
     # 本地启动容器进行测试
      - ping 127.0.0.1 -w 10
     # - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
-  only:
-    - master
 
 deploy:
   stage: deploy
