@@ -48,3 +48,4 @@ deploy:
   stage: deploy
   script:
      - ping 127.0.0.1 -w 10
+  when: manual
