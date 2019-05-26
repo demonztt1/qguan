@@ -33,7 +33,7 @@ test:
   script:
     # 本地启动容器进行测试
      - ping 127.0.0.1 -w 10
-    # - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
+     - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
   tags:
       - test #执行机器
 deploy:
