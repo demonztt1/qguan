@@ -36,6 +36,7 @@ test:
      - docker run -d --name $CONTAINER_NAME -p 3000:3000 $REGISTRY_IMAGE_TAG
   tags:
       - test #执行机器
+  when: manual
 deploy:
   stage: deploy
   script:
