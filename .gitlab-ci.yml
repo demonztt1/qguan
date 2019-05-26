@@ -44,4 +44,4 @@ deploy:
   only:
       - master #git分支
   tags:
-      - ci-cd #执行机器
+      - ci-cd #执行机器  tag
