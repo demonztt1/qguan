@@ -1,4 +1,4 @@
-var proxy = require("Proxy");
+var proxy = require("stc/com/1110111011101110/qguan/Proxy");
 
 /*
 before,after,afterReturning,afterThrowing,around

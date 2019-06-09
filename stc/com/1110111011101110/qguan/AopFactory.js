@@ -1,4 +1,4 @@
-import AopProxy from  './AopProxy'
+import AopProxy from './AopProxy'
 class AopFactory{
 
     findFun(){

@@ -1,15 +1,26 @@
 {
-  "name": "jsspring",
+  "name": "qguan",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "regenerator-runtime": "^0.13.2"
+  },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "glob": "^7.1.3",
     "path": "^0.12.7"
   },
   "scripts": {

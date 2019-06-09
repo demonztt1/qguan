@@ -1,4 +1,4 @@
-var aopProxy = require("../../../../stc/com/1110111011101110/spring/util/AopProxy");
+var aopProxy = require("../../../../stc/com/1110111011101110/qguan/AopProxy");
 class A{
     constructor(){
         this.s=0;
