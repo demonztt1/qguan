@@ -4,7 +4,7 @@ var springProxy = require("../../../../stc/com/1110111011101110/qguan/Proxy");
 
 
 
-var loadDir = require('../../../../stc/com/1110111011101110/qguan/Load_dir');
+var loadDir = require('../../../../stc/com/1110111011101110/qguan/utils/Load_dir');
 /*var springProxy = require("./proxy");
 */
 var Module = loadDir('../../../../../test/com/1110111011101110/module');

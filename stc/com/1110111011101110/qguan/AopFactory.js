@@ -1,4 +1,6 @@
 import AopProxy from './AopProxy'
+
+//  生成对象工厂
 class AopFactory{
 
     findFun(){

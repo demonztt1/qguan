@@ -2,7 +2,7 @@
  * js 动态代理
  */
 
-class SpringProxy{
+class QGuanProxy{
     constructor(obj ){
         this.loader=Object.assign(obj);
     }
@@ -21,4 +21,4 @@ class SpringProxy{
     }
 }
 
-module.exports = SpringProxy
+module.exports = QGuanProxy

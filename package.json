@@ -2,19 +2,21 @@
   "name": "qguan",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "stc/com/1110111011101110/qguan/qguan.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "jszip": "^3.2.1",
     "regenerator-runtime": "^0.13.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
-    "@babel/register": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",

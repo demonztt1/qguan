@@ -1,23 +1,12 @@
 
-function testable(isTestable) {
-    console.log(isTestable);
-    return function(target) {
-        target.isTestable = isTestable;
+import (`./xxx.js`).then(
+    (utils)=>{
+        console.log(utils.isTestable)
+
     }
-}
-
-@testable("x","xxxx")
-class MyTestableClass {
-
-    constructor(){
-        //@dec("x","xxxx")
-    }
-
-}
+);
 
 
 
-
-console.log(MyTestableClass.isTestable)
 ; // true
 

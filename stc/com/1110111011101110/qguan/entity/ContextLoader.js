@@ -1,4 +1,4 @@
-import ApplicationContext from './ApplicationContext'
+import ApplicationContext from '../ApplicationContext'
 
 class ContextLoader{
 

@@ -2,4 +2,4 @@ require('@babel/register') ({ presets: [ '@babel/env' ]})
 
 
 
-module.exports = require('./WebPdfApplication')
+module.exports = require('./ZipApplication')
