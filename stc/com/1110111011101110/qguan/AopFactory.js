@@ -1,18 +1,50 @@
 import AopProxy from './AopProxy'
-
-//  生成对象工厂
+var babel = require("@babel/core");
+import  ApplicationContext from './ApplicationContext'
+/**
+ * aop工厂
+ *
+ * 处理类一个
+ * 实体类一个
+ *
+ * 返回被aop过的处理过的类
+ */
 class AopFactory{
+    constructor(){
+        //es5转 es6的选项  import 加 注解 @ decorator
+        this. options= { presets: [ '@babel/env' ],
+            "plugins": [
+                ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                ["@babel/plugin-syntax-dynamic-import"]
 
-    findFun(){
+            ]
+        }
+        this.applicationContext=ApplicationContext.getInstance();
 
-        import bind from   bindPath
+    }
+    //nodejs 字符串动态加载
+    requireFromString(src, filename) {
+        var Module = module.constructor;
+        var m = new Module();
+        m._compile(src, filename);
+        return m.exports;
+    }
+    //生成普通实体类
+    createObj(name,code){
+        //es6代码转换 es5代码
+         babel.transformAsync(code,this.options).then(result => {
+            return     this.requireFromString( result.code,name );
+        });
+    }
+
+    //生成 aop 的实体类
+    createAopObj(name,obj){
+
         let  aopProxy= new  AopProxy;
-        aopProxy.iocs=new Array();
-
-        let bindClass=new Proxy(bind, aopProxy)
         aopProxy.aopFuns={}
-        let bindImpl=new bindClass();
-        let sopImpn=new Proxy(  bindImpl ,  aopProxy  )
+
+        return new Proxy(obj, aopProxy)
+
     }
 }
 
