@@ -12,8 +12,10 @@ class QGuanRunApplication{
       // this.applicationContext =ApplicationContext.getInstance();
         console.log("启动 轻管")
 
-        console.log(str)
+        DirLoad('test/com/quanTest/aop/')
         DirLoad(str[0])
+
+
        /* this.aopFactory=new AopFactory();
 
         var A=fs.readFileSync(path.resolve()+'/test/com/quanTest/service/A.js','utf8');

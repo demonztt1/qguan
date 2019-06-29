@@ -16,11 +16,14 @@ class AopFun{
     around(){
         console.log(" around 执行")
     }
+
 }
 
   class    AopProxy    {
     findFuns(key){
-        let aopFun=this.aopFuns[key];
+
+        let aopFun=this.aopFuns
+
         if(null==aopFun){
             return new AopFun();
         }
@@ -31,7 +34,13 @@ class AopFun{
         let fun=  this.findFuns(key);
         trapTarget[key] = function () {
             fun.before.apply(this, arguments);
-            let ret = oldValue.apply(this, arguments);
+            let ret;
+            try {
+                 ret = oldValue.apply(this, arguments);
+            }catch (err){
+                fun.afterThrowing(err);
+            }
+
             fun.after.apply(this, arguments);
             return ret
         };
@@ -44,7 +53,12 @@ class AopFun{
          let fun=  this.findFuns(key);
          trapTarget[key] = function () {
              fun.before.apply(this, arguments);
-             let ret = oldValue.apply(this, arguments);
+             let ret;
+             try {
+                 ret = oldValue.apply(this, arguments);
+             }catch (err){
+                 fun.afterThrowing(err);
+             }
              fun.after.apply(this, arguments);
              return ret
          };

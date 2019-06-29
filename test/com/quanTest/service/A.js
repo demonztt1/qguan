@@ -8,6 +8,7 @@ class  A{
 }
     findA(){
         console.log("执行 A")
+        throw Error('参数1、参数2不能为空');
     }
 }
 

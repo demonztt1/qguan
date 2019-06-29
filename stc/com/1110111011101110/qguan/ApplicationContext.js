@@ -16,11 +16,13 @@ class ApplicationContext {
 
     //获取bing
     findBind(bindName){
-        if(this.binds[bindName] == null){
-            throw  new Error();
-        }
         return  this.binds[bindName];
     }
+    //通过class名称获取Bing
+    findBindByClssName(className){
+        return  this.binds[className];
+    }
+
     //添加bing
     addBind(bindName,obj){
         if(this.binds[bindName]!=null){
@@ -31,6 +33,11 @@ class ApplicationContext {
     //删除bing
     removeBind(bindName){
       delete  this.binds[bindName];
+    }
+
+    //通过路径正则获取对象
+    findBendByPathRegular(reg){
+        return  this.binds[reg];
     }
 
 }

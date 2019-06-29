@@ -1,14 +1,10 @@
 
 //前置通知
-export function Before(beforeFn = function () { }) {
+export function Before(reg) {
     return function (target, name, descriptor) {
-        let oldValue = descriptor.value;
 
-        descriptor.value = function () {
-            beforeFn.apply(this, arguments);
-            return oldValue.apply(this, arguments);
-        };
-
-        return descriptor;
+        if(reg){
+            console.log("reg   " + reg);
+        }
     }
 }

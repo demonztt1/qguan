@@ -1,11 +1,29 @@
-import  After  from './stc/com/1110111011101110/qguan/aopDecorator/After' ;
-import  AfterReturning  from './stc/com/1110111011101110/qguan/aopDecorator/AfterReturning';
-import  AfterThrowing  from './stc/com/1110111011101110/qguan/aopDecorator/AfterThrowing';
-import  Around  from './stc/com/1110111011101110/qguan/aopDecorator/Around';
-import  Before  from './stc/com/1110111011101110/qguan/aopDecorator/Before';
 
+import {Aop} from "./stc/com/1110111011101110/qguan/aopDecorator/Aop";
+@Aop("c")
 class  C{
-
-
+    constructor(){
+        console.log(" 创建C")
+    }
+    before(){
+        console.log(" before 执行")
+    }
+    after(){
+        console.log(" after 执行")
+    }
+    afterReturning(){
+        console.log(" afterReturning 执行")
+    }
+    afterThrowing(err){
+        debugger;
+        console.log(" afterThrowing 执行  "+err)
+    }
+    around(){
+        console.log(" around 执行")
+    }
 
 }
+
+
+
+module.exports =  C;

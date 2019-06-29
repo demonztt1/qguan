@@ -1,17 +1,13 @@
+
 /**
  * 最终通知
  */
 
-export function After(afterFn = function () { }) {
+export function After(reg) {
     return function (target, name, descriptor) {
-        let oldValue = descriptor.value;
 
-        descriptor.value = function () {
-            let ret = oldValue.apply(this, arguments);
-            afterFn.apply(this, arguments);
-            return ret;
-        };
-
-        return descriptor;
+        if(reg){
+            console.log("reg   " + reg);
+        }
     }
 }
