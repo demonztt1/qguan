@@ -49,9 +49,9 @@ class AopFun{
         }
 
      set(trapTarget, key, receiver) {
-         let oldValue = trapTarget[key];
-         let fun=  this.findFuns(key);
-         trapTarget[key] = function () {
+         let oldValue = target[proName];
+         let fun=  this.findFuns(proName);
+         target[key] = function () {
              fun.before.apply(this, arguments);
              let ret;
              try {
@@ -62,7 +62,7 @@ class AopFun{
              fun.after.apply(this, arguments);
              return ret
          };
-         let res= Reflect.get(trapTarget, key, receiver);
+         let res= Reflect.get(target,proName,proValue,receiver);
          return res;
      }
 

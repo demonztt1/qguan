@@ -1,6 +1,6 @@
 
 import {Aop} from "./stc/com/1110111011101110/qguan/aopDecorator/Aop";
-@Aop("c")
+@Aop("c",['findA'])
 class  C{
     constructor(){
         console.log(" 创建C")
@@ -15,8 +15,7 @@ class  C{
         console.log(" afterReturning 执行")
     }
     afterThrowing(err){
-        debugger;
-        console.log(" afterThrowing 执行  "+err)
+        console.log("异常  "+err)
     }
     around(){
         console.log(" around 执行")

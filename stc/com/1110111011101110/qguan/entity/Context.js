@@ -1,22 +1,19 @@
+import Square from './Square'
 
-class Context(){
+class  Context{
     constructor(){
-        this.bend={};
+        bends={}
+    }
+    saveBend(name,bend,type){
+         let square=new Square(type);
+        square.saveBend(bend)
+        this.bends[name]=bend;
     }
 
-    findBend(name){
-        return   Object.assign(this.bend[name]);
-    };
-
-    addBend(name,obj){
-        this.bend[name]=obj;
-    };
-
-    delBend(name){
-        delete this.bend[name];
+    findBendRunMsg(name){
+        return  this.bendBase.bend;
     }
-    findList(name){
-        return   this.bend;
-    };
-
 }
+
+
+module.exports = Bends;

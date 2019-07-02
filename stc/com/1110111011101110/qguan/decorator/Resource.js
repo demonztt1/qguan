@@ -4,8 +4,8 @@ export function Resource(...list) {
         let context =ApplicationContext.getInstance();
       let obj=new target()
         for(let i=0;i<list.length;i++){
-            obj[list[i]]= context.findBind(list[i])
+            obj[list[i]]= context.findBend(list[i])
         }
-        context.addBind(target.name,obj) ;
+        context.saveBend(target.name,obj) ;
     }
 }

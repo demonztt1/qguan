@@ -7,7 +7,7 @@ export function Service(...list) {
         let aopFactory=new AopFactory();
         let context =ApplicationContext.getInstance();
         let obj= aopFactory.createAopObj({},new target(),'c')
-        context.addBind(list[0],obj) ;
+        context.saveBend(list[0],obj) ;
         obj.findA();
     }
 }
