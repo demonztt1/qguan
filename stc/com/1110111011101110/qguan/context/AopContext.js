@@ -1,19 +1,6 @@
-/**
- * 上下文
- */
-class ApplicationContext {
+import  ApplicationContext from '../ApplicationContext';
 
-    constructor(){
-        this.bends={}
-        this.aop=false;
-    }
-
-    static getInstance( ) {
-        if(!this.instance) {
-            this.instance =new ApplicationContext();
-        }
-        return this.instance;
-    }
+class  AopContext{
 
     /**
      * 获取bend
@@ -23,11 +10,8 @@ class ApplicationContext {
      * @param type
      */
     findBend(name,obj,value,type){
-        if(type){
-            let typeObj= this.findBend(type);
-            return typeObj.findBend(name,obj,value,type);
-        }
-        return this.bends[name];
+       let context=  this.applicationContext=ApplicationContext.getInstance();
+        return context.findBend('c');
     }
 
     /**
@@ -60,11 +44,6 @@ class ApplicationContext {
         }
         delete  this.bends[BendName];
     }
-
-
 }
 
-
-
-
-module.exports = ApplicationContext;
+module.exports = AopContext;

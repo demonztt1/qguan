@@ -2,6 +2,8 @@
 import  ApplicationContext from  './ApplicationContext';
 import  RunLoad  from  './utils/RunLoad';
 import  AopFactory  from  './AopFactory';
+import  AopContext  from  './context/AopContext';
+
 import fs from  'fs'
 import path  from  'path'
 import  DirLoad from './utils/DirLoad'
@@ -11,21 +13,14 @@ class QGuanRunApplication{
     constructor(str){
       // this.applicationContext =ApplicationContext.getInstance();
         console.log("启动 轻管")
+        let context=  this.applicationContext=ApplicationContext.getInstance();
 
-        DirLoad('test/com/quanTest/aop/')
-        DirLoad(str[0])
+        let aopContext=new AopContext();
+         context.saveBend('aop',aopContext) ;// aop
+        let dirLoad=new DirLoad();
+        context.saveBend('dirLoad',dirLoad) ;//文件夹扫描
 
-
-       /* this.aopFactory=new AopFactory();
-
-        var A=fs.readFileSync(path.resolve()+'/test/com/quanTest/service/A.js','utf8');
-        var B=fs.readFileSync(path.resolve()+ '/test/com/quanTest/service/B.js','utf8');
-          this.aopFactory.createObj("a",A);
-
-      this.aopFactory.createObj("b",B);*/
-   /*    let classB= ApplicationContext.getInstance().findBind("B")
-        classB.runA()*/
-         //  debugger;
+        RunLoad();
 
     }
 

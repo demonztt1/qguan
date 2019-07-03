@@ -29,17 +29,30 @@ class AopFactory{
         m._compile(src, filename);
         return m.exports;
     }
-    //生成普通实体类
-    createObj(name,code){
-        //es6代码转换 es5代码
-         babel.transformAsync(code,this.options).then(result => {
-            return     this.requireFromString( result.code,name );
+
+    /**
+     * 通过code直接创建
+     */
+    createCodeObj(name,code){
+        babel.transformAsync(code, this.options).then(result => {
+            return this.requireFromString(result.code, name)
         });
     }
+    //生成普通实体类
+    createObj(name,target) {
+        //es6代码转换 es5代码
+        if (this.applicationContext.aop) {
+            let obj=new  target();
+            return    this.createAopObj(name,obj,{});
+        }else {
+            return new target();
+        }
+    }
+
 
     //生成 aop 的实体类
     createAopObj(name,obj,reg){
-        let  regf = this.applicationContext.findBend(reg)
+        let  regf = this.applicationContext.findBend(name,obj,reg,'aop')
         let  aopProxy= new  AopProxy();
         aopProxy.aopFuns=regf
         return new Proxy(obj, aopProxy)
