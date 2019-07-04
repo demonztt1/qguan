@@ -1,6 +1,7 @@
 
 import  ApplicationContext from  './ApplicationContext';
 import  RunLoad  from  './utils/RunLoad';
+import  ZipLoad  from  './utils/ZipLoad';
 import  AopFactory  from  './AopFactory';
 import  AopContext  from  './context/AopContext';
 
@@ -19,7 +20,8 @@ class QGuanRunApplication{
          context.saveBend('aop',aopContext) ;// aop
         let dirLoad=new DirLoad();
         context.saveBend('dirLoad',dirLoad) ;//文件夹扫描
-
+        let zipLoad=new ZipLoad();
+        context.saveBend('zipLoad',zipLoad) ;//文件夹扫描
         RunLoad();
 
     }

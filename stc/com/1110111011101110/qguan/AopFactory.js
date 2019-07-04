@@ -35,7 +35,10 @@ class AopFactory{
      */
     createCodeObj(name,code){
         babel.transformAsync(code, this.options).then(result => {
-            return this.requireFromString(result.code, name)
+           let codeobj=   this.requireFromString(result.code, name);
+           let obj=new  codeobj();
+            debugger
+            return codeobj;
         });
     }
     //生成普通实体类
