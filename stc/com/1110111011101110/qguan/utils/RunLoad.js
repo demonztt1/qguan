@@ -9,7 +9,7 @@ import  fs from  'fs';
 import  ApplicationContext from '../ApplicationContext'
 
 
-function RunLoad(isTestable) {
+function RunLoad(resolve,isTestable) {
 
     let myPath = path.resolve()+'/qguan.config';
     let context=ApplicationContext.getInstance();
@@ -31,6 +31,7 @@ function RunLoad(isTestable) {
                 load.load(word[0].trim(),word[1].trim(),word[2].trim(),word[3].trim());
             }
         }
+        return resolve('200 OK');
     });
 }
 

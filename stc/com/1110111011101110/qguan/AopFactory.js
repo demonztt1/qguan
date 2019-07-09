@@ -36,8 +36,6 @@ class AopFactory{
     createCodeObj(name,code){
         babel.transformAsync(code, this.options).then(result => {
            let codeobj=   this.requireFromString(result.code, name);
-           let obj=new  codeobj();
-            debugger
             return codeobj;
         });
     }

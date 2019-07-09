@@ -6,6 +6,7 @@ class ApplicationContext {
     constructor(){
         this.bends={}
         this.aop=false;
+        this.bendArray=new Array();
     }
 
     static getInstance( ) {
@@ -37,6 +38,15 @@ class ApplicationContext {
      * @param value
      * @param type
      */
+    addBend(obj,name,value,type){
+        if(type){
+            let typeObj= this.bends.findBend(type);
+            typeObj.addBend(obj,name,value,type);
+            return;
+        }
+        this.bendArray.push(obj)
+    }
+
     saveBend(name,obj,value,type){
         if(type){
             let typeObj= this.bends.findBend(type);
@@ -45,6 +55,7 @@ class ApplicationContext {
         }
         this.bends[name]=obj;
     }
+
     /**
      * 删除bing
      * @param name
