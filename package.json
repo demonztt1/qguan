@@ -2,7 +2,7 @@
   "name": "qguan",
   "version": "1.0.0",
   "description": "",
-  "main": "stc/com/1110111011101110/qguan/qguan.js",
+  "main": "stc/com/1110111011101110/qguan/QGuanRunApplication.js",
   "directories": {
     "test": "test"
   },
