@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head id="i18n_" module="SC_I18N">
+    <!--#include virtual="/views/items/resource_.shtml"-->
+    <title>xml文件对比</title>
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+<body class="ibody">
+<fieldset class="fieldset_eui">
+    <legend data-i18n="common:COMMON_OPERATION.SEARCH">搜索</legend>
+    <form id="ffSearch" method="post">
+        <div id="searchBar">
+            <table cellspacing="0" cellpadding="2" class="table table-bordered table-info">
+                <tr>
+                    <th data-i18n="RES.SYS_USER_LIST.QY_USER_NAME" style="width:80px">组织名称：</th>
+                    <td style="width:110px">
+                        &nbsp; <input class="easyui-textbox" name="orgName" id="orgName"style="width:100px"/>
+                    </td>
+                    <td colspan="2">
+                        &nbsp;
+                        <a class="searchBtn" data-options="iconCls:'icon-search'"
+                           onclick="doSearch_()"><span data-i18n="common:COMMON_OPERATION.QUERY">查询</span></a>&nbsp;&nbsp;
+                        <a class="clearBtn" data-options="iconCls:'icon-clear'"
+                           onclick="doClear_()"><span data-i18n="common:COMMON_OPERATION.RESET">重置</span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</fieldset>
+<div id="mlayout" class="easyui-layout" style="height: 100%;">
+    <div id="lay_left"  data-options="region:'west',split:true" style="width:45% ;">
+        <ul class="domtree"   style="display: none">
+            <li>
+                &#60;0>
+                <ul>
+                    <li>2级菜单</li>
+                    <li>
+                        2级菜单
+                        <ul>
+                            <li class="diff">3级菜单</li>
+                            <li>3级菜单
+                            </li>
+                            <li class="diffL">&#62;&#62;</li>
+                            <li class="diffR">&#60;&#60; </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                1级菜单
+                <ul>
+                    <li>2级菜单</li>
+                    <li>2级菜单</li>
+                </ul>
+                &#60;/0>
+            </li>
+        </ul>
+        <ul class="domtree" id ="treeL"></ul>
+    </div>
+    <div id="lay_right" data-options="region:'center'">
+        <ul class="domtree" id ="treeR"></ul>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="difxml.css">
+<script type="text/javascript" src="/js/datagrid_utils.js"></script>
+<script type="text/javascript" src="XmlNode.js"></script>
+<script type="text/javascript" src="lexicalXml.js"></script>
+<script type="text/javascript">
+   var FuncCode_='SYS_ORG_LIST';
+    function i18nCallBack() {
+        $('#mlayout').css({
+            height: $(document.body).height() - $("fieldset").height() - 20
+        });
+        tree();
+      //  InitDataGrid();
+    }
+   function doSearch_(){
+       var queryParams = $("#ffSearch").serializeObject();
+       queryParams = $.extend({}, queryParams, {FunctionCode: FuncCode_});
+       InitFuncCodeRequest_({
+           data: queryParams,
+           successCallBack: function (jdata) {
+               if (jdata.code != RESULT_CODE.SUCCESS_CODE) {
+                   layer.msg(jdata.msg, {icon: 5});
+                   return;
+               }
+               var tdata_ = WarpTreeGridData_(jdata.data, "0", ['ORG_ID', 'PARENT_OID']);
+               $("#dg").treegrid('loadData', tdata_);
+           }
+       });
+
+   }
+   function doClear_(){
+       $("#orgName").textbox('setValue', '');
+       doSearch_();
+   }
+    /** 刷新列表数据 */
+    function reload_() {
+        $("#dg").datagrid("reload");
+    }
+
+   function loadXML(url) {
+       var xmlDoc;
+       try { //IE浏览器
+           xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+       } catch (e) { //firefox,opera...火狐、欧朋等浏览器
+           xmlDoc = document.implementation.createDocument("", "", null);
+       }
+       try {
+           xmlDoc.asyc = false; //是否异步调用
+           xmlDoc.load("./xxxx.xml"); //文件路径
+       } catch (e) { //chrome
+           var xmlhttp = new window.XMLHttpRequest();
+           //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
+           xmlhttp.open("GET",  url, false);
+           xmlhttp.send(null);
+           if (xmlhttp.readyState == 4) {
+               xmlDoc = xmlhttp.response;
+           }
+           return xmlDoc;
+       }
+   }
+//resources/static/views/diffXml/controller.xml
+    function tree() {
+        var data1= loadXML("CSCA350-353000-00M01-01-X_2_20180901.xml")
+        var data2= loadXML("CSCA350-353000-00M01-01-X_3_20181001.xml")
+
+
+        var lexxml=new LexXML();
+        var list1=lexxml.lex(data1);
+        var list2=lexxml.lex(data2);
+
+        var kTree=new XmlTree();
+        var aTree=new XmlTree();
+
+
+        aTree.list=list1 ;
+        kTree.list=list2;
+        aTree.toLR();
+
+        kTree.toLR();
+//kTree.toLR();
+
+
+        var contrast=new ContrastXml(aTree,kTree);
+        var wTree=contrast.contrast(null);
+
+
+        var showTree=new  ShowTree(aTree,kTree,wTree)
+        var RTrs=   showTree.buildTree("R")
+        var LTrs=   showTree.buildTree("L")
+        //console.log(treTree)
+        $("#treeL").html(LTrs);
+        $("#treeR").html(RTrs);
+    }
+
+
+   /**新增 */
+   function editData() {
+       var title_ = $.i18n.t('编辑数据');
+       ShowWindowIframe({
+           width: "450", height: "450", title: title_, param: {},
+           url: "/views/diffXml/difXml_edit.shtml"
+       });
+   }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head id="i18n_" module="">
+    <!--#include virtual="/views/items/resource_.shtml"-->
+    <script type="text/javascript" src="/js/plugins/ajaxfileupload/ajaxfileupload.js"></script>
+    <title></title>
+</head>
+<body>
+
+<div style="">
+    <div class="ibox float-e-margins">
+
+        <input class="easyui-textbox" data-options="multiline:true" value="" style="width:700px;height:450px">
+
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/js/datagrid_utils.js"></script>
+<script type="text/javascript">
+    var param;
+    var operation;
+    var maintenanceBaseMap;
+    function i18nCallBack() {
+        param = getParentParam_();
+        operation = param.operation;
+
+
+    }
+
+</script>
+</html>

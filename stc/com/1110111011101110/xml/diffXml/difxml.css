@@ -1,0 +1,59 @@
+/*ul.domtree,*/
+ul.domtree{
+    margin: 0;
+    padding: 0 0 0 0.5em;
+}
+ul.domtree ul {
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+ul.domtree li {
+     white-space: nowrap;
+}
+
+.diff{
+    color:#F00
+}
+
+.diffL{
+    color:#F00;
+    content: "\60 ";
+
+}
+.diffR{
+    color:#F00;
+    content: "\62 ";
+
+}
+/*
+ul.domtree li {
+    list-style: none;
+    position: relative;
+}
+
+ul.domtree>li:first-child:before {
+    border-style: none none solid none;
+}
+
+ul.domtree li:before {
+    position: absolute;
+    !*content: '';*!
+    top: -0.01em;
+    left: -0.7em;
+    width: 0.5em;
+    height: 0.615em;
+    border-style: none none solid solid;
+    border-width: 0.05em;
+    border-color: #aaa;
+}
+
+ul.domtree li:not(:last-child):after {
+    position: absolute;
+   !* content: '';*!
+    top: 0.7em;
+    left: -0.7em;
+    bottom: 0;
+    border-style: none none none solid;
+    border-width: 0.05em;
+    border-color: #aaa;
+}*/
