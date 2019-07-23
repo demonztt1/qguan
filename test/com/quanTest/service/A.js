@@ -1,9 +1,10 @@
 
-import { Service } from './stc/com/1110111011101110/qguan/decorator/Service.js'
-
+//import {  } from './stc/com/1110111011101110/qguan/decorator/Service.js'
+let Service =qGuan.find("service")
 @Service("a")
 class  A{
     constructor (){
+
         console.log("创建 A")
 }
     findA(){

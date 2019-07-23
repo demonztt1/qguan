@@ -4,7 +4,7 @@ export function Controller(url) {
     return function (target, name, descriptor) {
         let context =ApplicationContext.getInstance();
         if(!target.name){
-            let obj= context.findBend(target.constructor.name)
+            let obj= context.find(target.constructor.name)
             let rule=new  Rule(target.constructor.name,name,url)
             if(!obj){
                 obj=   new target.constructor();

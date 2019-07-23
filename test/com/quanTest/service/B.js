@@ -1,5 +1,5 @@
-import { Resource } from './stc/com/1110111011101110/qguan/decorator/Resource.js'
 
+let Resource =qGuan.find("resource")
 @Resource("a")
 class  B {
     constructor(){

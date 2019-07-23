@@ -12,21 +12,17 @@ class HttpContex{
             if(bend.reg==urlw&&bend.type=="http"){
                let obj= this.context.findBend(bend.className);
 
-               let httpRun =new HttpRun();
-               let httpProxy =new HttpProxy(obj,bend.method);
-                debugger;
+                httpRun  (obj,obj[bend.method],req,res,url,type)
+               /*let httpProxy =new HttpProxy(obj,bend.method);
                let httpObj=   new Proxy(httpRun, httpProxy)
-
-                debugger;
-                httpObj.run(req,res,url,type);
+                httpObj.run(req,res,url,type);*/
 
             }
         }
     }
 }
-class HttpRun{
-    run(req,res,url,type){
-    }
+function   httpRun(obj,method, req,res,url,type) {
+    method.call(obj,req,res,url,type)
 }
 class    HttpProxy    {
     constructor(obj,method){
@@ -37,9 +33,10 @@ class    HttpProxy    {
         let oldValue = this.obj[this.method];
 
         trapTarget[key] = function () {
-            return   oldValue.apply(this, arguments);
+            return   oldValue.apply(obj, arguments);
         };
-        let res= Reflect.get(this.obj, this.method, receiver);
+        debugger;
+        let res= Reflect.get(this.obj, this.method, this.obj);
         return res;
     }
 

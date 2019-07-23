@@ -53,7 +53,7 @@ class AopFactory{
 
     //生成 aop 的实体类
     createAopObj(name,obj,reg){
-        let  regf = this.applicationContext.findBend(name,obj,reg,'aop')
+        let  regf = this.applicationContext.find(name,obj,reg,'aopContext')
         let  aopProxy= new  AopProxy();
         aopProxy.aopFuns=regf
         return new Proxy(obj, aopProxy)

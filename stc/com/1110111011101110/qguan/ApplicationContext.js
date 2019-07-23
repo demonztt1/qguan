@@ -15,6 +15,20 @@ class ApplicationContext {
         }
         return this.instance;
     }
+    /**
+     * 获取bend
+     * @param name
+     * @param obj
+     * @param value
+     * @param type
+     */
+    find(name,obj,value,type){
+        if(type){
+            let typeObj= this.find(type);
+            return typeObj.find(name,obj,value,type);
+        }
+        return this.bends[name];
+    }
 
     /**
      * 获取bend

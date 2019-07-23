@@ -1,5 +1,4 @@
-
-import {Aop} from "./stc/com/1110111011101110/qguan/aopDecorator/Aop";
+let Aop =qGuan.find("aop")
 @Aop("c",['findA'])
 class  C{
     constructor(){

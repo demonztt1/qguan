@@ -1,12 +1,15 @@
- import { Controller } from './stc/com/1110111011101110/qguan/http/Controller'
- import { Resource } from './stc/com/1110111011101110/qguan/decorator/Resource.js'
+
+ let Controller =qGuan.find("controller")
+ let Resource =qGuan.find("resource")
 @Controller("/user")
  @Resource("a")
 class UserCtrl{
    @Controller("/login")
     login(req,res){
+      // console.log(this )
+   this.a.findA();
         res.write('login');
-        this.a.findA();
+
         return;
     }
 

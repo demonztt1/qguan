@@ -9,9 +9,9 @@ class  AopContext{
      * @param value
      * @param type
      */
-    findBend(name,obj,value,type){
+    find(name,obj,value,type){
        let context=  this.applicationContext=ApplicationContext.getInstance();
-        return context.findBend('c');
+        return context.find('c');
     }
 
     /**
