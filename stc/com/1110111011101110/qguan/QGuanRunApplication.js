@@ -26,6 +26,7 @@ class QGuanRunApplication{
         }else {
             global.qGuan =context
         }
+        qGuan.inBrowser=inBrowser;
 
         let aopContext=new AopContext();
          context.saveBend('aopContext',aopContext) ;// aop
